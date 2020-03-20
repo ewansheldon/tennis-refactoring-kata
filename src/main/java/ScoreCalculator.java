@@ -1,4 +1,5 @@
 public class ScoreCalculator {
+    public static final int WIN_THRESHOLD = 4;
     private Player player1;
     private Player player2;
 
@@ -10,13 +11,17 @@ public class ScoreCalculator {
     }
 
     String calculateScore() {
-        if (player1.getPoints() == player2.getPoints()) {
+        if (isDraw()) {
             return drawScore();
         }
-        if (player1.getPoints() >= 4 || player2.getPoints() >= 4) {
-            return advantageOrWinningScore();
+        if (player1.getPoints() < WIN_THRESHOLD && player2.getPoints() < WIN_THRESHOLD) {
+            return scores[player1.getPoints()] + "-" + scores[player2.getPoints()];
         }
-        return scores[player1.getPoints()] + "-" + scores[player2.getPoints()];
+        return advantageOrWinningScore();
+    }
+
+    private boolean isDraw() {
+        return player1.getPoints() == player2.getPoints();
     }
 
     String advantageOrWinningScore() {
