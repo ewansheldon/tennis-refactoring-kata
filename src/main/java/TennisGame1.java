@@ -1,29 +1,32 @@
 
 public class TennisGame1 implements TennisGame {
 
+    private final Player player1;
+    private final Player player2;
     private int m_score1 = 0;
     private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
     private String[] scores = {"Love", "Fifteen", "Thirty", "Forty"};
 
     public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+        player1 = new Player(player1Name);
+        player2 = new Player(player2Name);
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
-            m_score1 += 1;
-        else
-            m_score2 += 1;
+        if (playerName.equals(player1.getName())) {
+            m_score1++;
+            player1.addPoint();
+        } else {
+            m_score2++;
+            player2.addPoint();
+        }
     }
 
     public String getScore() {
-        if (m_score1 == m_score2) {
+        if (player1.getPoints() == player2.getPoints()) {
             return drawScore();
         }
-        if (m_score1 >= 4 || m_score2 >= 4) {
+        if (player1.getPoints() >= 4 || player2.getPoints() >= 4) {
             return advantageOrWinningScore();
         }
         return scores[m_score1] + "-" + scores[m_score2];
@@ -35,30 +38,18 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String winningScore() {
-        return m_score1 > m_score2 ? "Win for player1" : "Win for player2";
+        return player1Winning() ? "Win for player1" : "Win for player2";
     }
 
     private String advantageScore() {
-        return m_score1 > m_score2 ? "Advantage player1" : "Advantage player2";
+        return player1Winning() ? "Advantage player1" : "Advantage player2";
+    }
+
+    private boolean player1Winning() {
+        return m_score1 > m_score2;
     }
 
     private String drawScore() {
-        String score;
-        switch (m_score1) {
-            case 0:
-                score = "Love-All";
-                break;
-            case 1:
-                score = "Fifteen-All";
-                break;
-            case 2:
-                score = "Thirty-All";
-                break;
-            default:
-                score = "Deuce";
-                break;
-
-        }
-        return score;
+        return m_score1 < 3 ? scores[m_score1] + "-All" : "Deuce";
     }
 }
