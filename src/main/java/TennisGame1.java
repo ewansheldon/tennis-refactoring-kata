@@ -12,7 +12,6 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (playerName.equals(player1.getName())) {
-            m_score1++;
             player1.addPoint();
         } else {
             player2.addPoint();
