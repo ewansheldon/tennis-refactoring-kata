@@ -30,13 +30,16 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String advantageOrWinningScore() {
-        String score;
-        int minusResult = m_score1 - m_score2;
-        if (minusResult == 1) score = "Advantage player1";
-        else if (minusResult == -1) score = "Advantage player2";
-        else if (minusResult >= 2) score = "Win for player1";
-        else score = "Win for player2";
-        return score;
+        int diff = Math.abs(m_score1 - m_score2);
+        return diff == 1 ? advantageScore() : winningScore();
+    }
+
+    private String winningScore() {
+        return m_score1 > m_score2 ? "Win for player1" : "Win for player2";
+    }
+
+    private String advantageScore() {
+        return m_score1 > m_score2 ? "Advantage player1" : "Advantage player2";
     }
 
     private String drawScore() {
