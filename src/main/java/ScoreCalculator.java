@@ -1,9 +1,11 @@
 public class ScoreCalculator {
-    public static final int WIN_THRESHOLD = 4;
+    public static final int LOW_SCORE_TRESHOLD = 3;
+    public static final String ADVANTAGE = "Advantage ";
+    public static final String WIN_FOR = "Win for ";
     private Player player1;
     private Player player2;
 
-    private String[] scores = {"Love", "Fifteen", "Thirty", "Forty"};
+    private String[] scoreFormat = {"Love", "Fifteen", "Thirty", "Forty"};
 
     public ScoreCalculator(Player player1, Player player2) {
         this.player1 = player1;
@@ -25,7 +27,7 @@ public class ScoreCalculator {
     }
 
     private boolean isLowScore() {
-        return player1.getPoints() < WIN_THRESHOLD && player2.getPoints() < WIN_THRESHOLD;
+        return player1.getPoints() <= LOW_SCORE_TRESHOLD && player2.getPoints() <= LOW_SCORE_TRESHOLD;
     }
 
     private String advantageOrWinningScore() {
@@ -36,24 +38,25 @@ public class ScoreCalculator {
         return Math.abs(player1.getPoints() - player2.getPoints());
     }
 
-    private boolean player1Winning() {
-        return player1.getPoints() > player2.getPoints();
+    private Player winningPlayer() {
+        return player1.getPoints() > player2.getPoints() ? player1 : player2;
     }
 
     private String drawScore() {
-        return player1.getPoints() < 3 ? scores[player1.getPoints()] + "-All" : "Deuce";
+        return player1.getPoints() < LOW_SCORE_TRESHOLD ? scoreFormat[player1.getPoints()] + "-All" : "Deuce";
     }
 
     private String lowScore() {
-        return scores[player1.getPoints()] + "-" + scores[player2.getPoints()];
+        return scoreFormat[player1.getPoints()] + "-" + scoreFormat[player2.getPoints()];
     }
 
     private String winningScore() {
-        return player1Winning() ? "Win for player1" : "Win for player2";
+        return WIN_FOR + winningPlayer().getName();
     }
 
     private String advantageScore() {
-        return player1Winning() ? "Advantage player1" : "Advantage player2";
+        return ADVANTAGE + winningPlayer().getName();
     }
+
 
 }
