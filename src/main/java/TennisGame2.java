@@ -25,19 +25,19 @@ public class TennisGame2 implements TennisGame {
             return winningScore();
         }
 
-        if (P1point > P2point) {
-            return "Advantage player1";
-        }
+        return advantageScore();
+    }
 
-        return "Advantage player2";
+    private String advantageScore() {
+        return P1point > P2point ?
+                "Advantage player1" :
+                "Advantage player2";
     }
 
     private String winningScore() {
-        if (P1point - P2point >= 2) {
-            return "Win for player1";
-        }
-
-        return "Win for player2";
+        return P1point > P2point ?
+                "Win for player1" :
+                "Win for player2";
     }
 
     private String lowScore() {
