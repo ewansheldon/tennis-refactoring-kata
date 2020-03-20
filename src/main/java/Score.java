@@ -1,4 +1,4 @@
-public class ScoreCalculator {
+public class Score {
     public static final int LOW_SCORE_TRESHOLD = 3;
     public static final String ADVANTAGE = "Advantage ";
     public static final String WIN_FOR = "Win for ";
@@ -9,12 +9,12 @@ public class ScoreCalculator {
 
     private String[] scoreName = {"Love", "Fifteen", "Thirty", "Forty"};
 
-    public ScoreCalculator(Player player1, Player player2) {
+    public Score(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
 
-    public String calculateScore() {
+    public String calculate() {
         if (isDraw()) {
             return drawScore();
         }
