@@ -3,19 +3,19 @@ public class ScoreCalculator {
     private Player player1;
     private Player player2;
 
-    String[] scores = {"Love", "Fifteen", "Thirty", "Forty"};
+    private String[] scores = {"Love", "Fifteen", "Thirty", "Forty"};
 
     public ScoreCalculator(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
 
-    String calculateScore() {
+    public String calculateScore() {
         if (isDraw()) {
             return drawScore();
         }
-        if (player1.getPoints() < WIN_THRESHOLD && player2.getPoints() < WIN_THRESHOLD) {
-            return scores[player1.getPoints()] + "-" + scores[player2.getPoints()];
+        if (isLowScore()) {
+            return lowScore();
         }
         return advantageOrWinningScore();
     }
@@ -24,27 +24,36 @@ public class ScoreCalculator {
         return player1.getPoints() == player2.getPoints();
     }
 
-    String advantageOrWinningScore() {
+    private boolean isLowScore() {
+        return player1.getPoints() < WIN_THRESHOLD && player2.getPoints() < WIN_THRESHOLD;
+    }
+
+    private String advantageOrWinningScore() {
         return getAbsPointDiff() == 1 ? advantageScore() : winningScore();
     }
 
-    int getAbsPointDiff() {
+    private int getAbsPointDiff() {
         return Math.abs(player1.getPoints() - player2.getPoints());
     }
 
-    boolean player1Winning() {
+    private boolean player1Winning() {
         return player1.getPoints() > player2.getPoints();
     }
 
-    String winningScore() {
+    private String drawScore() {
+        return player1.getPoints() < 3 ? scores[player1.getPoints()] + "-All" : "Deuce";
+    }
+
+    private String lowScore() {
+        return scores[player1.getPoints()] + "-" + scores[player2.getPoints()];
+    }
+
+    private String winningScore() {
         return player1Winning() ? "Win for player1" : "Win for player2";
     }
 
-    String advantageScore() {
+    private String advantageScore() {
         return player1Winning() ? "Advantage player1" : "Advantage player2";
     }
 
-    String drawScore() {
-        return player1.getPoints() < 3 ? scores[player1.getPoints()] + "-All" : "Deuce";
-    }
 }
