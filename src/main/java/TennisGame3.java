@@ -20,11 +20,15 @@ public class TennisGame3 implements TennisGame {
         } else {
             if (player1Score == player2Score)
                 return "Deuce";
-            s = player1Score > player2Score ? player1Name : player2Name;
-            return ((player1Score - player2Score)*(player1Score - player2Score) == 1) ? "Advantage " + s : "Win for " + s;
+            s = winningPlayer();
+            return (Math.abs(player1Score - player2Score) == 1) ? "Advantage " + s : "Win for " + s;
         }
     }
-    
+
+    private String winningPlayer() {
+        return player1Score > player2Score ? player1Name : player2Name;
+    }
+
     public void wonPoint(String playerName) {
         if (playerName.equals(player1Name))
             this.player1Score += 1;
