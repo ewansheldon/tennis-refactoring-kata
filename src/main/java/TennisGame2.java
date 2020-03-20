@@ -18,11 +18,11 @@ public class TennisGame2 implements TennisGame {
             score = lowScore();
         }
 
-        if (P1point == P2point && P1point < 4) {
-            score = lowDrawScore();
-        }
+//        if (P1point == P2point && P1point < 4) {
+//            score = lowDrawScore();
+//        }
 
-        if (P1point == P2point && P1point >= 3) {
+        if (P1point == P2point) {
             score = draw();
         }
 
@@ -49,11 +49,7 @@ public class TennisGame2 implements TennisGame {
     }
 
     private String draw() {
-        return "Deuce";
-    }
-
-    private String lowDrawScore() {
-        return formatScores[P1point] + "-All";
+        return P1point >= 3 ? "Deuce" : formatScores[P1point] + "-All";
     }
 
     public void wonPoint(String player) {
