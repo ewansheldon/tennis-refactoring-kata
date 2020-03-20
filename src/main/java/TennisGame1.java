@@ -3,8 +3,6 @@ public class TennisGame1 implements TennisGame {
 
     private final Player player1;
     private final Player player2;
-    private int m_score1 = 0;
-    private int m_score2 = 0;
     private String[] scores = {"Love", "Fifteen", "Thirty", "Forty"};
 
     public TennisGame1(String player1Name, String player2Name) {
@@ -17,7 +15,6 @@ public class TennisGame1 implements TennisGame {
             m_score1++;
             player1.addPoint();
         } else {
-            m_score2++;
             player2.addPoint();
         }
     }
@@ -29,11 +26,11 @@ public class TennisGame1 implements TennisGame {
         if (player1.getPoints() >= 4 || player2.getPoints() >= 4) {
             return advantageOrWinningScore();
         }
-        return scores[m_score1] + "-" + scores[m_score2];
+        return scores[player1.getPoints()] + "-" + scores[player2.getPoints()];
     }
 
     private String advantageOrWinningScore() {
-        int diff = Math.abs(m_score1 - m_score2);
+        int diff = Math.abs(player1.getPoints() - player2.getPoints());
         return diff == 1 ? advantageScore() : winningScore();
     }
 
@@ -46,10 +43,10 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean player1Winning() {
-        return m_score1 > m_score2;
+        return player1.getPoints() > player2.getPoints();
     }
 
     private String drawScore() {
-        return m_score1 < 3 ? scores[m_score1] + "-All" : "Deuce";
+        return player1.getPoints() < 3 ? scores[player1.getPoints()] + "-All" : "Deuce";
     }
 }
