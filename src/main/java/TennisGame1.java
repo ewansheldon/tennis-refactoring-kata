@@ -16,7 +16,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private Player getPlayer(String playerName) {
-        return playerName.equals(player1.getName()) ? player1 : player2;
+        return playerName.equals(player1.name) ? player1 : player2;
     }
 
     public String getScore() {

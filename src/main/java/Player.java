@@ -1,5 +1,5 @@
 public class Player {
-    private String name;
+    public final String name;
     private int points;
 
     public Player(String name) {
@@ -15,7 +15,4 @@ public class Player {
         return points;
     }
 
-    public String getName() {
-        return name;
-    }
 }

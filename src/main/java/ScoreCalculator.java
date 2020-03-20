@@ -2,10 +2,12 @@ public class ScoreCalculator {
     public static final int LOW_SCORE_TRESHOLD = 3;
     public static final String ADVANTAGE = "Advantage ";
     public static final String WIN_FOR = "Win for ";
+    public static final String DEUCE = "Deuce";
+    public static final String ALL = "-All";
     private Player player1;
     private Player player2;
 
-    private String[] scoreFormat = {"Love", "Fifteen", "Thirty", "Forty"};
+    private String[] scoreName = {"Love", "Fifteen", "Thirty", "Forty"};
 
     public ScoreCalculator(Player player1, Player player2) {
         this.player1 = player1;
@@ -43,20 +45,18 @@ public class ScoreCalculator {
     }
 
     private String drawScore() {
-        return player1.getPoints() < LOW_SCORE_TRESHOLD ? scoreFormat[player1.getPoints()] + "-All" : "Deuce";
+        return player1.getPoints() < LOW_SCORE_TRESHOLD ? scoreName[player1.getPoints()] + ALL : DEUCE;
     }
 
     private String lowScore() {
-        return scoreFormat[player1.getPoints()] + "-" + scoreFormat[player2.getPoints()];
+        return scoreName[player1.getPoints()] + "-" + scoreName[player2.getPoints()];
     }
 
     private String winningScore() {
-        return WIN_FOR + winningPlayer().getName();
+        return WIN_FOR + winningPlayer().name;
     }
 
     private String advantageScore() {
-        return ADVANTAGE + winningPlayer().getName();
+        return ADVANTAGE + winningPlayer().name;
     }
-
-
 }
