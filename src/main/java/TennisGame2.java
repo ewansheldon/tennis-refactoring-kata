@@ -21,19 +21,23 @@ public class TennisGame2 implements TennisGame {
             return lowScore();
         }
 
-        if (P1point - P2point >= 2) {
-            return "Win for player1";
+        if (Math.abs(P1point - P2point) >= 2) {
+            return winningScore();
         }
 
-        if (P2point - P1point >= 2) {
-            return "Win for player2";
-        }
-
-        if (P1point > P2point && P2point >= 3) {
+        if (P1point > P2point) {
             return "Advantage player1";
         }
 
         return "Advantage player2";
+    }
+
+    private String winningScore() {
+        if (P1point - P2point >= 2) {
+            return "Win for player1";
+        }
+
+        return "Win for player2";
     }
 
     private String lowScore() {
