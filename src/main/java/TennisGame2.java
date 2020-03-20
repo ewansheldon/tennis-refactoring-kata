@@ -3,8 +3,6 @@ public class TennisGame2 implements TennisGame {
     public int P1point = 0;
     public int P2point = 0;
 
-    public String P1res = "";
-    public String P2res = "";
     private String player1Name;
     private String player2Name;
     private String[] formatScores = {"Love", "Fifteen", "Thirty", "Forty"};
@@ -21,7 +19,7 @@ public class TennisGame2 implements TennisGame {
         }
 
         if (P1point == P2point && P1point < 4) {
-            score = lowDrawScore(score);
+            score = lowDrawScore();
         }
 
         if (P1point == P2point && P1point >= 3) {
@@ -50,77 +48,18 @@ public class TennisGame2 implements TennisGame {
         return formatScores[P1point] + "-" + formatScores[P2point];
     }
 
-    private String p1WinningNotToLove() {
-        String score;
-        if (P1point == 2)
-            P1res = "Thirty";
-        if (P1point == 3)
-            P1res = "Forty";
-        if (P2point == 0)
-            P2res = "Love";
-        if (P2point == 1)
-            P2res = "Fifteen";
-        if (P2point == 2)
-            P2res = "Thirty";
-        score = P1res + "-" + P2res;
-        return score;
-    }
-
-    private String p2ToLove() {
-        String score;
-        if (P2point == 1)
-            P2res = "Fifteen";
-        if (P2point == 2)
-            P2res = "Thirty";
-        if (P2point == 3)
-            P2res = "Forty";
-
-        P1res = "Love";
-        score = P1res + "-" + P2res;
-        return score;
-    }
-
-    private String p1ToLove() {
-        String score;
-        if (P1point == 1)
-            P1res = "Fifteen";
-        if (P1point == 2)
-            P1res = "Thirty";
-        if (P1point == 3)
-            P1res = "Forty";
-
-        P2res = "Love";
-        score = P1res + "-" + P2res;
-        return score;
-    }
-
     private String draw() {
         return "Deuce";
     }
 
-    private String lowDrawScore(String score) {
-        if (P1point == 0)
-            score = "Love";
-        if (P1point == 1)
-            score = "Fifteen";
-        if (P1point == 2)
-            score = "Thirty";
-        score += "-All";
-        return score;
+    private String lowDrawScore() {
+        return formatScores[P1point] + "-All";
     }
 
     public void wonPoint(String player) {
         if (player == "player1")
-            P1Score();
+            P1point++;
         else
-            P2Score();
-    }
-
-    private void P1Score() {
-        P1point++;
-    }
-
-    private void P2Score() {
-        P2point++;
+            P2point++;
     }
 }
