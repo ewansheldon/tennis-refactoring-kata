@@ -11,11 +11,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName.equals(player1.getName())) {
-            player1.addPoint();
-        } else {
-            player2.addPoint();
-        }
+        getPlayer(playerName).addPoint();
+    }
+
+    private Player getPlayer(String playerName) {
+        return playerName.equals(player1.getName()) ? player1 : player2;
     }
 
     public String getScore() {
