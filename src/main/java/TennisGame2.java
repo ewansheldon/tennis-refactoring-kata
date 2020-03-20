@@ -29,15 +29,15 @@ public class TennisGame2 implements TennisGame {
     }
 
     private String advantageScore() {
-        return P1point > P2point ?
-                "Advantage player1" :
-                "Advantage player2";
+        return "Advantage " + winningPlayer();
     }
 
     private String winningScore() {
-        return P1point > P2point ?
-                "Win for player1" :
-                "Win for player2";
+        return "Win for " + winningPlayer();
+    }
+
+    private String winningPlayer() {
+        return P1point > P2point ? player1Name : player2Name;
     }
 
     private String lowScore() {
@@ -49,7 +49,7 @@ public class TennisGame2 implements TennisGame {
     }
 
     public void wonPoint(String player) {
-        if (player == "player1")
+        if (player.equals(player1Name))
             P1point++;
         else
             P2point++;
