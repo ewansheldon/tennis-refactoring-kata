@@ -18,7 +18,9 @@ public class TennisGame1 implements TennisGame {
         return playerName.equals(player1.getName()) ? player1 : player2;
     }
 
+
     public String getScore() {
+//    move this to separate class?
         if (player1.getPoints() == player2.getPoints()) {
             return drawScore();
         }
@@ -29,8 +31,15 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String advantageOrWinningScore() {
-        int diff = Math.abs(player1.getPoints() - player2.getPoints());
-        return diff == 1 ? advantageScore() : winningScore();
+        return getAbsPointDiff() == 1 ? advantageScore() : winningScore();
+    }
+
+    private int getAbsPointDiff() {
+        return Math.abs(player1.getPoints() - player2.getPoints());
+    }
+
+    private boolean player1Winning() {
+        return player1.getPoints() > player2.getPoints();
     }
 
     private String winningScore() {
@@ -39,10 +48,6 @@ public class TennisGame1 implements TennisGame {
 
     private String advantageScore() {
         return player1Winning() ? "Advantage player1" : "Advantage player2";
-    }
-
-    private boolean player1Winning() {
-        return player1.getPoints() > player2.getPoints();
     }
 
     private String drawScore() {
